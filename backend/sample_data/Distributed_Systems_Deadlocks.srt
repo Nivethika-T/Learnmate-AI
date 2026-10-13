@@ -1,0 +1,23 @@
+1
+00:00:01,000 --> 00:00:06,500
+Welcome to CS402 Lecture on Distributed Systems Concurrency and Deadlock Prevention.
+
+2
+00:00:07,000 --> 00:00:15,000
+Today we are analyzing how deadlock occurs when competing processes request exclusive access to shared system resources.
+
+3
+00:00:16,000 --> 00:00:26,500
+Recall the four essential Coffman conditions: Mutual Exclusion, Hold and Wait, No Preemption, and Circular Wait.
+
+4
+00:00:27,000 --> 00:00:38,200
+If all four conditions hold simultaneously, the system enters an unresolvable cyclic deadlock where no process can make forward progress.
+
+5
+00:00:39,000 --> 00:00:51,500
+To eliminate deadlock, we utilize Banker's Algorithm developed by Dijkstra. The algorithm tests for safety before granting any allocation.
+
+6
+00:00:52,000 --> 00:01:05,000
+If granting the allocation preserves a safe sequence where all processes can ultimately complete, the request is granted; otherwise, the requesting thread is forced to wait.

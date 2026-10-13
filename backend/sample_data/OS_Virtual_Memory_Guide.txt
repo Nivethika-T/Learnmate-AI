@@ -1,0 +1,26 @@
+# Chapter 8: Virtual Memory & Demand Paging
+Course: CS301 Operating Systems Architecture
+Instructor: Dr. Alan Vance
+
+1. Overview of Virtual Memory
+Virtual memory is a fundamental memory management technique that provides an idealized abstraction of the storage resources that are actually available on a given machine. It creates an illusion of a very large, uniform array of storage, separating user logical memory from physical memory.
+
+2. Paging and Translation Lookaside Buffers (TLB)
+Physical memory is divided into fixed-sized blocks known as page frames (typically 4 KB in modern architectures). Logical address space is similarly partitioned into contiguous blocks called pages. When a process issues an address reference:
+- The Memory Management Unit (MMU) intercepts the virtual address.
+- The hardware Translation Lookaside Buffer (TLB), an associative cache residing directly on the CPU die, is probed for the translation mapping.
+- If a TLB hit occurs, the physical address is synthesized in 1 clock cycle.
+- If a TLB miss occurs, a page table walk is executed in main RAM, updating the TLB for subsequent accesses.
+
+3. Page Fault Interrupts & Demand Paging
+In pure demand paging, an operating system does not load pages into physical memory until they are explicitly referenced by executing code:
+- When an instruction references a page frame marked invalid in the Page Table, the hardware CPU triggers a Page Fault Interrupt.
+- The OS trap handler halts the thread, identifies the backing store block on swap space, allocates an available physical frame, initiates asynchronous disk I/O, and updates the PTE (Page Table Entry).
+- Once the page is copied, the instruction is restarted seamlessly.
+
+4. Page Replacement Algorithms & Thrashing
+When physical RAM is exhausted, page replacement algorithms must select victim pages to evict to disk:
+- Least Recently Used (LRU): Evicts the page frame that has not been referenced for the longest period of time.
+- First-In First-Out (FIFO): Replaces the oldest allocated page, susceptible to Belady's anomaly.
+- Clock (Second Chance): Uses a circular buffer and use bit to approximate LRU with low overhead.
+- Thrashing: Occurs when a system spends more clock cycles servicing page faults than executing instructions. Thrashing is prevented by tracking the process Working Set Model and throttling multiprogramming degree.

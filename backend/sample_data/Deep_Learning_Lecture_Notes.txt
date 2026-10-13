@@ -1,0 +1,19 @@
+# Artificial Intelligence: Neural Network Optimization & Backpropagation
+Department of Computer Science & Machine Learning
+
+1. Supervised Learning & Empirical Risk Minimization
+Supervised learning algorithms infer a mapping function from labeled training examples consisting of input vectors and ground-truth targets. The model measures deviation using loss functions such as Mean Squared Error (MSE) for regression and Cross-Entropy for categorical classification.
+
+2. Stochastic Gradient Descent & Adam Optimizer
+Parameters are iteratively updated along the negative gradient vector:
+w_{t+1} = w_t - \eta \nabla L(w_t)
+Modern deep learning predominantly uses the Adam (Adaptive Moment Estimation) optimizer, which maintains exponentially decaying averages of past gradients (momentum) and past squared gradients (adaptive learning rates).
+
+3. Overfitting, Generalization & Regularization Techniques
+A central goal of machine learning is generalization to unseen validation and test distributions:
+- Overfitting occurs when an over-parameterized neural network fits random noise in the training set, leading to high variance.
+- L2 Regularization (Weight Decay) penalizes the Frobenius norm of weight matrices, preventing weights from growing excessively large.
+- Dropout randomly zeroes activations with probability p during each training pass, preventing complex co-adaptations between hidden units.
+
+4. Backpropagation & Activation Functions
+To avoid the vanishing gradient problem in deep feedforward architectures, modern neural networks use non-linear activations such as ReLU (Rectified Linear Unit), defined as f(x) = max(0, x). Backpropagation computes the partial derivative of the scalar loss with respect to all trainable parameters by recursively propagating error signals backwards using the chain rule of differential calculus.
